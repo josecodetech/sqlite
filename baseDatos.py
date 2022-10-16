@@ -55,6 +55,14 @@ def consultarDatosId(conexion, cursor, id):
     return resultado
 
 
+def actualizarDatos(conexion, cursor, id, nombre):
+    sentencia = f"UPDATE usuarios set usuario='{nombre}' WHERE id={id}"
+    cursor.execute(sentencia)
+    conexion.commit()
+    print("Dato actualizado correctamente")
+    return True
+
+
 if __name__ == '__main__':
     con, cursor = conectar()
     # print(con)
@@ -72,6 +80,11 @@ if __name__ == '__main__':
         print("Nombre: ", fila[1])
         print("Email: ", fila[2])
         print("\n")
+    resultado = consultarDatosId(con, cursor, 15)
+    print(resultado)
+    for fila in resultado:
+        print(fila)
+    actualizarDatos(con, cursor, 15, 'ROSA')
     resultado = consultarDatosId(con, cursor, 15)
     print(resultado)
     for fila in resultado:
