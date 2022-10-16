@@ -63,6 +63,14 @@ def actualizarDatos(conexion, cursor, id, nombre):
     return True
 
 
+def borrarDatos(conexion, cursor, id):
+    sentencia = f"DELETE from usuarios WHERE id={id}"
+    cursor.execute(sentencia)
+    conexion.commit()
+    print("Se ha realizado el borrado del registro indicado")
+    return True
+
+
 if __name__ == '__main__':
     con, cursor = conectar()
     # print(con)
@@ -80,12 +88,17 @@ if __name__ == '__main__':
         print("Nombre: ", fila[1])
         print("Email: ", fila[2])
         print("\n")
-    resultado = consultarDatosId(con, cursor, 15)
+    resultado = consultarDatosId(con, cursor, 14)
     print(resultado)
     for fila in resultado:
         print(fila)
-    actualizarDatos(con, cursor, 15, 'ROSA')
-    resultado = consultarDatosId(con, cursor, 15)
+    actualizarDatos(con, cursor, 14, 'ROSA')
+    resultado = consultarDatosId(con, cursor, 14)
+    print(resultado)
+    for fila in resultado:
+        print(fila)
+    borrarDatos(con, cursor, 14)
+    resultado = consultarDatosId(con, cursor, 14)
     print(resultado)
     for fila in resultado:
         print(fila)
