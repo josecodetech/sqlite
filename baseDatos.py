@@ -31,6 +31,30 @@ def insertarDatos(conexion, cursor, datos):
     conexion.close()
 
 
+def consultarDatos01(conexion, cursor):
+    sentencia = "SELECT * FROM usuarios"
+    resultado = cursor.execute(sentencia)
+    # print(cursor.fetchall())
+    # print(resultado)
+    for fila in resultado:
+        print(fila)
+    conexion.close()
+
+
+def consultarDatos(conexion, cursor):
+    sentencia = "SELECT id,usuario,email FROM usuarios"  # LIMIT 2
+    resultado = cursor.execute(sentencia)
+
+    # conexion.close()
+    return resultado
+
+
+def consultarDatosId(conexion, cursor, id):
+    sentencia = f"SELECT usuario,email FROM usuarios WHERE id={id}"
+    resultado = cursor.execute(sentencia)
+    return resultado
+
+
 if __name__ == '__main__':
     con, cursor = conectar()
     # print(con)
@@ -39,4 +63,16 @@ if __name__ == '__main__':
     #insertarDatos(con, cursor)
     datos = [('ANTONIO', 'KDFA@GMAIL.COM', '23DJK'),
              ('ALBERTO', 'DKJFKJ@GMAIL.COM', 'DKJFK2')]
-    insertarDatos(con, cursor, datos)
+    #insertarDatos(con, cursor, datos)
+    resultado = consultarDatos(con, cursor)
+    for fila in resultado:
+        print("*"*100)
+        print("\n")
+        print("ID: ", fila[0])
+        print("Nombre: ", fila[1])
+        print("Email: ", fila[2])
+        print("\n")
+    resultado = consultarDatosId(con, cursor, 15)
+    print(resultado)
+    for fila in resultado:
+        print(fila)
