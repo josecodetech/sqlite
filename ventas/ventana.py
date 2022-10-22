@@ -104,7 +104,19 @@ class Ventana():
                             bg=self.colorFondo, fg=self.colorLetra).place(x=180, y=280)
 
     def guardar(self):
-        pass
+        self.ventaTi01.set(self.efectivo01.get()+self.tarjetas01.get())
+        self.ventaTi02.set(self.efectivo02.get()+self.tarjetas02.get())
+        self.ventaTi03.set(self.efectivo03.get()+self.tarjetas03.get())
+        self.fechaActual = self.fecha.get()
+        datos = [
+            (self.fechaActual, 'Tienda01', self.efectivo01.get(),
+             self.tarjetas01.get(), self.ventaTi01.get()),
+            (self.fechaActual, 'Tienda02', self.efectivo02.get(),
+             self.tarjetas02.get(), self.ventaTi02.get()),
+            (self.fechaActual, 'Tienda03', self.efectivo03.get(),
+             self.tarjetas03.get(), self.ventaTi03.get())
+        ]
+        insertarDatos(datos)
 
     def borrar(self):
         self.fecha.set('00/00/00')
@@ -122,7 +134,8 @@ class Ventana():
         # self.dameFechaActual()
 
     def mostrar(self):
-        pass
+        ventaTiendas = dameVentas(self.fecha01.get(), self.fecha02.get())
+        messagebox.showinfo("Ventas", ventaTiendas)
 
     def dameFechaActual(self):
         diaAct = time.strftime("%d")
