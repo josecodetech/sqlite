@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import time
 from baseDatos import *
+from archivo import *
 
 
 class Ventana():
@@ -62,7 +63,8 @@ class Ventana():
             x=90, y=70, width=70)
         cjTarjetas01 = Entry(self.ventana, textvariable=self.tarjetas01).place(
             x=90, y=100, width=70)
-        cjTotal01 = Entry(self.ventana, textvariable=self.ventaTi01).place(
+
+        cjTotal01 = Entry(self.ventana, textvariable=self.ventaTi01, state='disabled').place(
             x=90, y=130, width=70)
         # tienda 02
         etTienda02 = Label(self.ventana, text="Tienda 02",
@@ -71,7 +73,7 @@ class Ventana():
             x=180, y=70, width=70)
         cjTarjetas02 = Entry(self.ventana, textvariable=self.tarjetas02).place(
             x=180, y=100, width=70)
-        cjTotal02 = Entry(self.ventana, textvariable=self.ventaTi02).place(
+        cjTotal02 = Entry(self.ventana, textvariable=self.ventaTi02, state='disabled').place(
             x=180, y=130, width=70)
         # tienda 03
         etTienda03 = Label(self.ventana, text="Tienda 03",
@@ -80,7 +82,7 @@ class Ventana():
             x=270, y=70, width=70)
         cjTarjetas03 = Entry(self.ventana, textvariable=self.tarjetas03).place(
             x=270, y=100, width=70)
-        cjTotal03 = Entry(self.ventana, textvariable=self.ventaTi03).place(
+        cjTotal03 = Entry(self.ventana, textvariable=self.ventaTi03, state='disabled').place(
             x=270, y=130, width=70)
 
         btnGuardar = Button(self.ventana, text='Guardar', command=self.guardar,
@@ -135,7 +137,20 @@ class Ventana():
 
     def mostrar(self):
         ventaTiendas = dameVentas(self.fecha01.get(), self.fecha02.get())
-        messagebox.showinfo("Ventas", ventaTiendas)
+        fecha = self.fecha.get()
+        if ventaTiendas != {}:
+            messagebox.showinfo("Ventas", ventaTiendas)
+            texto = ''
+            for clave, valor in ventaTiendas.items():
+                texto = "\n"+texto+clave+" : "+str(valor)+"\n"
+            archivar("consulta", fecha, texto)
+        else:
+            messagebox.showinfo("Aviso", "No hay datos, revisa las fechas")
+        texto = ''
+        registros = dameRegistros()
+        for linea in registros:
+            texto = texto + "\n"+str(linea)+"\n"
+        archivar("registros", fecha, texto)
 
     def dameFechaActual(self):
         diaAct = time.strftime("%d")

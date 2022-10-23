@@ -45,6 +45,13 @@ def dameVentas(fechaIni, fechaFin):
     return ventaTienda
 
 
+def dameRegistros():
+    sentencia = "SELECT * FROM ventas"
+    con, cursor = conectar()
+    cursor.execute(sentencia)
+    return cursor
+
+
 if __name__ == '__main__':
     conectar()
     crearTabla()
@@ -54,3 +61,6 @@ if __name__ == '__main__':
     ]
     insertarDatos(datos)
     print(dameVentas('17/10/22', '19/10/22'))
+    registros = dameRegistros()
+    for linea in registros:
+        print(linea)
