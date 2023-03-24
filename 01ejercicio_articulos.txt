@@ -1,0 +1,2 @@
+Crea una base de datos que se llame articulos con los campos identificador, nombre, cantidad e importe, introduce varios articulos para comenzar.
+Realizar un CRUD (Crear, leer, actualizar y eliminar) para la base de datos.
