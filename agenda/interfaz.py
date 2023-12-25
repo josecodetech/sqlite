@@ -5,6 +5,7 @@ class AgendaGUI:
     def __init__(self, raiz, manejador_db):
         self.raiz = raiz
         self.raiz.title("Agenda de contactos")
+        self.raiz.geometry("400x300")
         self.db = manejador_db
         # crear widgets
         self.etiqueta_nombre = tk.Label(raiz, text='Nombre: ')
@@ -18,8 +19,8 @@ class AgendaGUI:
         self.entrada_nombre.grid(row=0, column=1)
         self.etiqueta_telefono.grid(row=1, column=0)    
         self.entrada_telefono.grid(row=1, column=1)
-        self.boton_agregar.grid(row=2, column=0)
-        self.boton_listar.grid(row=2, column=1)
+        self.boton_agregar.grid(row=2, column=0,padx=5,pady=5)
+        self.boton_listar.grid(row=2, column=1,padx=5,pady=5)
     def agregar_contacto(self):
         nombre = self.entrada_nombre.get()
         telefono = self.entrada_telefono.get()
